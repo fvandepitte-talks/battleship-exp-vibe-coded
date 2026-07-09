@@ -1,0 +1,30 @@
+# Keep the agent's context clean — it should never read these.
+# (Writes are already forbidden via .github/copilot-instructions.md.)
+
+# Frozen task file (the pasted prompt is self-contained)
+prompt.md
+
+# Experiment reporting artifacts (metrics, notes, results must not bias the run)
+run/
+
+# Operator tooling (metrics capture, not part of the game task)
+tools/
+
+# Dependencies and build output
+node_modules/
+dist/
+dist-ssr/
+build/
+out/
+.cache/
+.vite/
+
+# Secrets / environment
+.env
+.env.*
+
+# Logs and local artifacts
+*.log
+logs/
+.playwright-cli/
+.DS_Store

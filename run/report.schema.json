@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/fvandepitte-talks/battleship-exp-template/run/report.schema.json",
+  "title": "Experiment run report",
+  "description": "Measured data for this repository's experiment run. Written by tools/sessions.mjs capture to run/report.json. The hub deck (battleship-agentic-demo) aggregates the five experiment repos' reports into slides/public/data/run.json.",
+  "type": "object",
+  "required": ["experiment", "sessions"],
+  "additionalProperties": true,
+  "properties": {
+    "$schema": { "type": "string" },
+    "experiment": {
+      "type": "string",
+      "enum": ["single-vibe", "single-plan", "orch-vibe", "orch-plan", "fleet"],
+      "description": "Experiment id (from run/experiment.json)."
+    },
+    "label": {
+      "type": "string",
+      "description": "Human-readable execution-model label, e.g. 'single · no plan'."
+    },
+    "promptVersion": {
+      "type": "string",
+      "description": "Frozen prompt version this run used (see prompt.md)."
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this report was last written."
+    },
+    "acceptancePct": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Manual acceptance-criteria pass rate for this experiment (operator-scored, see run/result.md)."
+    },
+    "modelUsage": {
+      "type": "array",
+      "description": "Token usage grouped by model.",
+      "items": {
+        "type": "object",
+        "required": ["model"],
+        "additionalProperties": false,
+        "properties": {
+          "model": { "type": "string" },
+          "inputTokens": { "type": "number", "minimum": 0 },
+          "outputTokens": { "type": "number", "minimum": 0 }
+        }
+      }
+    },
+    "sessions": {
+      "type": "array",
+      "description": "Per-session rows. Written by tools/sessions.mjs capture.",
+      "items": {
+        "type": "object",
+        "required": ["id"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "models": { "type": "array", "items": { "type": "string" } },
+          "runtimeMinutes": { "type": ["number", "null"], "minimum": 0 },
+          "inputTokens": { "type": ["number", "null"], "minimum": 0 },
+          "outputTokens": { "type": ["number", "null"], "minimum": 0 },
+          "costUsd": { "type": ["number", "null"], "minimum": 0 },
+          "qualityScore": { "type": ["number", "null"] }
+        }
+      }
+    }
+  }
+}

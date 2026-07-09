@@ -1,0 +1,6 @@
+{
+  "id": "",
+  "label": "",
+  "promptVersion": "v2",
+  "note": "Operator: set id/label for this repo. ids: single-vibe | single-plan | orch-vibe | orch-plan | fleet; labels: 'single · no plan' | 'single · plan-first' | 'orchestration · no plan' | 'orchestration · plan-first' | 'parallel + human-led'"
+}

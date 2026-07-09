@@ -1,0 +1,67 @@
+# Generic GitHub Pages deploy for the Battleship experiment repos.
+#
+# Stack-agnostic contract (see prompt.md acceptance criteria):
+#   - `npm run build` produces a static site in `dist/`
+#   - assets use relative paths (site is served under /<repo-name>/)
+#
+# Skips gracefully while the repo is fresh from the template (no package.json yet).
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for a buildable game
+        id: game
+        run: |
+          if [ -f package.json ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "No package.json yet — nothing to deploy."
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.game.outputs.present == 'true'
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        if: steps.game.outputs.present == 'true'
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+
+      - name: Build
+        if: steps.game.outputs.present == 'true'
+        run: npm run build
+
+      - uses: actions/configure-pages@v5
+        if: steps.game.outputs.present == 'true'
+
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.game.outputs.present == 'true'
+        with:
+          path: dist
+
+      - uses: actions/deploy-pages@v4
+        if: steps.game.outputs.present == 'true'
+        id: deployment
