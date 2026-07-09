@@ -1,68 +1,7 @@
-# Battleship Experiment Template
+# Battleship Experiment vibe coded
 
-Template repository for the **Battleship agentic development experiments**
+Experiments repository for the **Battleship agentic development experiments**
 (talk: [`battleship-agentic-demo`](https://github.com/fvandepitte-talks/battleship-agentic-demo)).
-
-Each experiment runs in its **own repository** created from this template, so every
-run starts from the exact same base, keeps its context clean (no other results to
-peek at), and hosts its finished game on **GitHub Pages**.
-
-## The five experiments
-
-| # | Repository                       | Execution model            | Industry term |
-| - | -------------------------------- | -------------------------- | ------------- |
-| 1 | `battleship-exp-1-single-vibe`   | single · no plan           | vibe coding   |
-| 2 | `battleship-exp-2-single-plan`   | single · plan-first        | spec-first    |
-| 3 | `battleship-exp-3-orch-vibe`     | orchestration · no plan    | multi-agent   |
-| 4 | `battleship-exp-4-orch-plan`     | orchestration · plan-first | orchestrated  |
-| 5 | `battleship-exp-5-fleet`         | parallel + human-led       | agents at scale |
-
-Every experiment uses the **same frozen prompt** ([`prompt.md`](./prompt.md)); only
-the execution model changes.
-
-## What's in this template
-
-```text
-.
-├── prompt.md                  # Frozen task prompt (v2) — same for every experiment
-├── run/                       # Run artifacts (reporting only — agents don't touch)
-│   ├── experiment.json        # Which experiment this repo is (operator fills in)
-│   └── report.schema.json     # Contract for run/report.json
-├── tools/
-│   └── sessions.mjs           # Copilot CLI session metrics capture (writes run/)
-└── .github/
-    ├── copilot-instructions.md
-    ├── agents/                # Custom agents (team-lead, game-engine-developer, game-assets-developer, …)
-    ├── skills/game-engine/    # Domain knowledge skill
-    └── workflows/deploy-pages.yml  # Generic Pages deploy (builds dist/ if package.json exists)
-```
-
-The game itself is **not** in the template. Each experiment builds it from scratch
-in the repository root.
-
-## Operator setup (per experiment)
-
-1. **Create the repo** from this template (`Use this template` → name it per the table above, in `fvandepitte-talks`).
-2. **Fill in [`run/experiment.json`](./run/experiment.json)** with the experiment `id` and `label`.
-3. **Prune the execution kit** to match the experiment — do this *before* the run starts:
-   - Experiments 1–2 (single agent): delete `.github/agents/` — the single agent must not delegate.
-   - Experiments 3–5: keep `.github/agents/`.
-   - Keep `.github/skills/` everywhere — domain knowledge is equal for all runs.
-4. **Enable GitHub Pages**: repo Settings → Pages → Source: *GitHub Actions*.
-5. **Run the experiment** on `main` with the verbatim prompt from [`prompt.md`](./prompt.md),
-   executed per that file's execution-model table.
-6. **Capture metrics** after the session closes:
-
-   ```sh
-   node tools/sessions.mjs capture
-   ```
-
-   This writes `run/report.json` (deck-facing) and `run/metrics.json` (full detail).
-   Add qualitative notes in `run/experience-notes.md` and the acceptance checklist in
-   `run/result.md`.
-7. **Commit and push** — the deployed game appears at
-   `https://fvandepitte-talks.github.io/<repo-name>/` and the hub deck aggregates
-   `run/report.json` from all five repos.
 
 ## Deployment convention
 
