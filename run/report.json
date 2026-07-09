@@ -1,0 +1,22 @@
+{
+  "$schema": "./report.schema.json",
+  "experiment": "single-vibe",
+  "label": "Vibe - coded",
+  "promptVersion": "v2",
+  "acceptancePct": null,
+  "modelUsage": [],
+  "sessions": [
+    {
+      "id": "9ebd2e97",
+      "models": [
+        "claude-sonnet-4.6"
+      ],
+      "runtimeMinutes": 10,
+      "inputTokens": 2295306,
+      "outputTokens": 34447,
+      "costUsd": 1.404050625,
+      "qualityScore": null
+    }
+  ],
+  "generatedAt": "2026-07-09T14:15:53.834Z"
+}

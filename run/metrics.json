@@ -1,0 +1,68 @@
+{
+  "experiment": "single-vibe",
+  "sessions": [
+    {
+      "sessionId": "9ebd2e97-d52b-462b-8675-a7c340e16f47",
+      "mcSessionId": "b07d0cc5-2d36-4790-a878-7f7e8b3383da",
+      "mcTaskId": "1ef9223c-20d4-477a-a4e5-d62487f77389",
+      "experiment": "single-vibe",
+      "capturedAt": "2026-07-09T14:15:53.835Z",
+      "completed": true,
+      "selectedModels": [
+        "claude-fable-5",
+        "auto"
+      ],
+      "autoSelected": true,
+      "modelsUsed": [
+        "claude-sonnet-4.6"
+      ],
+      "perModel": [
+        {
+          "model": "claude-sonnet-4.6",
+          "selected": false,
+          "runtimeMinutes": 8.42,
+          "assistantMessages": 52,
+          "toolCalls": 52,
+          "tools": {
+            "view": 3,
+            "bash": 14,
+            "sql": 4,
+            "create": 23,
+            "edit": 6,
+            "store_memory": 1,
+            "task_complete": 1
+          },
+          "outputTokensObserved": 34447,
+          "inputTokens": 2295306,
+          "outputTokens": 34447,
+          "cacheReadTokens": 2192465,
+          "cacheWriteTokens": 102785,
+          "requests": 52,
+          "aicCredits": 1
+        }
+      ],
+      "runtimeMinutes": 9.53,
+      "startTimestamp": "2026-07-09T13:32:58.256Z",
+      "endTimestamp": "2026-07-09T13:42:29.893Z",
+      "counts": {
+        "user": 2,
+        "assistant": 52,
+        "tool": 52,
+        "permission": 0,
+        "total": 273
+      },
+      "tokens": {
+        "inputTokens": 2295306,
+        "outputTokens": 34447,
+        "cacheReadTokens": 2192465,
+        "cacheWriteTokens": 102785
+      },
+      "outputTokens": 34447,
+      "inputTokens": 2295306,
+      "costUsd": 1.404050625,
+      "aicCredits": 140.4050625,
+      "qualityScore": null,
+      "estimated": null
+    }
+  ]
+}
